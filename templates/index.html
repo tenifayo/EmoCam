@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Emotion Detection Selfie Camera</title>
+        <link rel="stylesheet" href='/static/main.css'>
+        <link rel="shortcut icon" href="/static/emo-cam.jpeg" type="image/x-icon">
+
+        <!-- <style>
+            body {
+                background-color: #3291a8;
+                margin: 0;
+            }
+            .title {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 60px;
+                background-color: #fff;
+            }
+            .title span {
+                font-size: 24px;
+                font-weight: bold;
+                color: #3291a8;
+            }
+            .icon {
+                margin-left: 10px;
+                height: 40px;
+                width: 40px;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: calc(100vh - 120px);
+                margin-top: 30px;
+            }
+            .video {
+                position: relative;
+                width: 50%;
+            }
+            #video {
+                width: 100%;
+                height: auto;
+            }
+            .display {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 50%;
+                padding-left: 50px;
+            }
+            .label {
+                font-size: 32px;
+                font-weight: bold;
+                color: #fff;
+                margin-bottom: 20px;
+                text-align: center;
+                text-transform: capitalize;
+            }
+            .emoji {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                background-color: #fff;
+                border-radius: 50%;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            }
+            
+            #emoji {
+                width: 80%;
+                height: auto;
+            }
+            .buttons {
+                display: flex;
+                justify-content: center;
+                margin-top: 30px;
+            }
+            input[type="submit"] {
+                font-size: 18px;
+                font-weight: bold;
+                background-color: #fff;
+                color: #3291a8;
+                border: none;
+                border-radius: 5px;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+                margin-right: 10px;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+            input[type="submit"]:hover {
+                background-color: #3291a8;
+                color: #fff;
+            }
+        </style> -->
+    </head>
+
+    <body> 
+        <div class="title">
+            <span>EmoCam</span>
+            <img class="icon" src="/static/emo-cam.jpeg" alt="">
+        </div>
+
+        <div class="container">
+            
+            <div class="video">
+                
+                <img id="video" src="{{ url_for('video_feed') }}" alt="Camera" width="100%" height="100%">   
+            </div>
+            
+            <div class="display">
+                <div class="label" id="label">{{ variable }}</div>
+                <div class="emoji" >
+                    <img id="emoji" src="/static/wave.png" alt="emoji" height="400" width="400">
+                </div>
+            </div>
+
+        </div>
+        <div class="buttons">
+            <form method="post" action="{{ url_for('tasks') }}">
+                <input type="submit" value="Capture" name="click"/>
+                <input type="submit" value="flip" name="flip"/>
+                <input type="submit" value="Detect Emotion" name="detect"/>
+                <input type="submit" value="filter1" name="f1" />
+                <input type="submit" value="filter2" name="f2" />
+                <input type="submit" value="filter3" name="f3" />
+                <input type="submit" value="Video" name="record" />
+
+            </form>
+        </div>  
+            
+       <script>
+        
+            var label = document.getElementById("label").innerText;
+            
+            
+            var emoji = document.getElementById("emoji")
+
+            if (label == "Happy"){
+                emoji.src = "/static/happy.png";
+            } else if (label == "Sad"){
+                emoji.src = "/static/sad.png";
+            } else if (label == "Neutral"){
+                emoji.src = "/static/neutral-face.png";
+            } else if (label == "Surprised"){
+                emoji.src = "/static/surprised.png";
+            } else if (label == "Disgusted"){
+                emoji.src = "/static/disgusted.png";
+            } else if (label == "Angry"){
+                emoji.src = "/static/angry.png";
+            } else if (label == "Fear"){
+                emoji.src = "/static/shocked.png";
+            }
+        
+       </script>     
+    </body>
+</html>
+
+
